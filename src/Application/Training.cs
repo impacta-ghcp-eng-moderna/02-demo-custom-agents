@@ -13,6 +13,8 @@ public sealed record Training(
     DateOnly StartDate,
     int DurationHours);
 
+public sealed record TrainingCount(int Count);
+
 public sealed record CreateAttendeeRequest(
     string? FirstName,
     string? LastName,

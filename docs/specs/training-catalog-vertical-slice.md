@@ -30,6 +30,25 @@ Permitir que uma pessoa responsável cadastre um treinamento interno e confirme,
 
 Operações adicionais de API podem ser implementadas depois com contratos explícitos, desde que não alterem silenciosamente os comportamentos aprovados aqui.
 
+## Contrato da API para contagem
+
+### Requisição
+
+- Método e rota: `GET /api/trainings/count`
+
+### Sucesso
+
+- Status: `200 OK`
+- Corpo no formato:
+
+  ```json
+  {
+    "count": 1
+  }
+  ```
+
+- `count` é zero quando o catálogo está vazio e corresponde ao total de treinamentos cadastrados nos demais casos.
+
 ## Dados do treinamento
 
 | Campo | Tipo | Regra |
@@ -97,6 +116,8 @@ Operações adicionais de API podem ser implementadas depois com contratos expl�
 6. Pela interface, dados válidos produzem confirmação e o novo item aparece na lista.
 7. Pela interface, uma falha preserva os dados preenchidos e apresenta mensagem útil.
 8. Dado um treinamento já cadastrado para uma data de início, quando outro treinamento for enviado com a mesma `startDate`, então a API retorna `409` e identifica o campo `startDate`, sem armazenar o segundo treinamento.
+9. Dado um catálogo vazio, quando a contagem for consultada, então a API retorna `200` com `count` igual a zero.
+10. Dado um catálogo com treinamentos, quando a contagem for consultada, então a API retorna `200` com `count` igual ao total cadastrado.
 
 ## Evidências esperadas
 
@@ -105,6 +126,7 @@ Operações adicionais de API podem ser implementadas depois com contratos expl�
 | validação de entrada | resposta HTTP e teste automatizado |
 | criação válida | resposta `201` e teste automatizado |
 | exclusividade da data | resposta `409` e teste automatizado confirmando que o segundo item não foi armazenado |
+| contagem do catálogo | resposta `200` e testes automatizados para catálogo vazio e preenchido |
 | armazenamento | consulta bem-sucedida após reiniciar a API |
 | sucesso na interface | fluxo executado no navegador |
 | erro na interface | fluxo de falha executado no navegador |
