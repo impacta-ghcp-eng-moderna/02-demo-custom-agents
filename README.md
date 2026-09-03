@@ -1,9 +1,8 @@
 # Demo: custom agents, subagents e handoffs
 
 Este repositório demonstra um fluxo de revisão com capacidades limitadas sobre a
-aplicação **Training Catalog**. A demonstração é cumulativa: preserva as
-instructions, o `AGENTS.md`, o prompt file, a skill e o custom agent herdados,
-enquanto evolui o agente de revisão e adiciona um pesquisador especializado.
+aplicação **Training Catalog**, usando um agente de revisão e um pesquisador
+especializado.
 
 O cenário usa o endpoint `GET /api/trainings/count`. O contrato exige resposta
 `200 OK` com a quantidade de treinamentos tanto para catálogo vazio quanto
@@ -39,11 +38,6 @@ evidências são suficientes.
 | [`docs/specs/training-catalog-vertical-slice.md`](docs/specs/training-catalog-vertical-slice.md) | Contrato e critérios de aceitação, incluindo a contagem do catálogo. |
 | [`src/Api/Program.cs`](src/Api/Program.cs) | Implementação do endpoint de contagem. |
 | [`src/Tests/Api.Tests/TrainingCountTests.cs`](src/Tests/Api.Tests/TrainingCountTests.cs) | Evidência do caso com catálogo preenchido; não cobre catálogo vazio. |
-| [`.github/prompts/criar-endpoint-treinamento.prompt.md`](.github/prompts/criar-endpoint-treinamento.prompt.md) | Prompt file preservado da demonstração anterior. |
-| [`.github/skills/review-ef-migration/SKILL.md`](.github/skills/review-ef-migration/SKILL.md) | Skill preservada para revisão de migrations. |
-| [`.github/copilot-instructions.md`](.github/copilot-instructions.md) | Instructions gerais do repositório. |
-| [`.github/instructions`](.github/instructions) | Instructions específicas por caminho. |
-| [`AGENTS.md`](AGENTS.md) | Orientações compartilhadas para agentes. |
 
 ## Configuração dos agentes
 
@@ -100,8 +94,10 @@ repositório em Codespaces.
 > Delegue o levantamento dos critérios e das evidências ao subagente permitido.
 > Execute somente a validação focada necessária e não altere arquivos.
 
-O revisor foi instruído a solicitar aprovação antes de executar comandos.
-Autorize apenas o teste focado que deseja observar.
+Quando o revisor solicitar a tool de terminal, confira o comando na confirmação
+nativa do VS Code e autorize apenas o teste focado que deseja observar. O agente
+não deve abrir uma etapa conversacional separada apenas para pedir aprovação,
+pois isso faria o handoff aparecer antes do relatório final.
 
 ## O que observar
 
@@ -165,28 +161,8 @@ novo, selecione o revisor e envie novamente a solicitação copiável.
 
 Se o handoff for enviado e gerar alterações, revise o diff no painel
 **Source Control** e descarte somente os arquivos produzidos nessa execução.
-Não descarte os agentes, a especificação, o endpoint, o teste preparado nem as
-customizações herdadas que compõem esta demonstração.
-
-## Prompt files e customizações acumuladas
-
-O prompt file
-[`criar-endpoint-treinamento.prompt.md`](.github/prompts/criar-endpoint-treinamento.prompt.md)
-continua disponível como `/endpoint-treinamento`. Ele representa uma tarefa
-reutilizável e parametrizada. Já o custom agent mantém uma persona e capacidades
-especializadas durante a conversa. Instructions aplicam regras automaticamente,
-e skills fornecem procedimentos especializados carregados sob demanda.
-
-Esses mecanismos são complementares:
-
-| Necessidade | Customização |
-| --- | --- |
-| Regra durável do repositório ou de um caminho | Custom instructions |
-| Tarefa focada e reutilizável | Prompt file |
-| Procedimento especializado com recursos próprios | Skill |
-| Papel persistente com tools e limites próprios | Custom agent |
-| Investigação isolada devolvida ao coordenador | Subagent |
-| Transição humana entre etapas | Handoff |
+Não descarte os agentes, a especificação, o endpoint nem o teste preparado que
+compõem esta demonstração.
 
 ## Validação do repositório
 

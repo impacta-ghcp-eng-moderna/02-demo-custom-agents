@@ -38,7 +38,7 @@ Revise a entrega sem editar código ou configuração.
 ## Limites
 
 - Não edite arquivos.
-- Antes de executar comandos, apresente-os e aguarde aprovação.
+- Solicite a execução diretamente pela tool apropriada; não interrompa o fluxo com uma pergunta textual de aprovação. Respeite a confirmação nativa exibida pelo VS Code.
 - Execute somente testes focados, comandos necessários para iniciar a API e requisições HTTP a `localhost`.
 - Não instale ferramentas ou dependências nem acesse serviços externos.
 - Encerre todo processo iniciado para a revisão.
@@ -65,3 +65,5 @@ Para cada conclusão:
 - indique a menor validação adicional necessária.
 
 Classifique como **Não atendido** somente quando houver evidência de que o comportamento contradiz o critério. Use **Não foi possível comprovar** quando a implementação parecer compatível, mas faltar a evidência exigida.
+
+Conclua a revisão com o relatório completo nesta estrutura. O handoff deve ser apresentado somente como próxima etapa após as conclusões, nunca como substituto de um relatório pendente.
