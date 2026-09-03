@@ -1,5 +1,5 @@
 {
-  "name": "Demo de instructions - .NET 10",
+  "name": "02-demo-custom-agents",
   "image": "mcr.microsoft.com/devcontainers/dotnet:1-10.0-noble",
   "customizations": {
     "vscode": {
