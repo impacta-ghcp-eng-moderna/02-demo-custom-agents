@@ -209,6 +209,13 @@ app.MapGet("/api/trainings", async (TrainingCatalogDbContext dbContext) =>
 })
 	.Produces<IReadOnlyCollection<Training>>(StatusCodes.Status200OK);
 
+app.MapGet("/api/trainings/count", async (TrainingCatalogDbContext dbContext) =>
+{
+	var count = await dbContext.Trainings.CountAsync();
+	return Results.Ok(new TrainingCount(count));
+})
+	.Produces<TrainingCount>(StatusCodes.Status200OK);
+
 app.MapGet("/api/trainings/{id:guid}", async (Guid id, TrainingCatalogDbContext dbContext) =>
 {
 	var training = await dbContext.Trainings.AsNoTracking().SingleOrDefaultAsync(training => training.Id == id);
