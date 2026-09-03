@@ -1,0 +1,13 @@
+{
+  "name": "Demo de instructions - .NET 10",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-10.0-noble",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-dotnettools.csdevkit"
+      ]
+    }
+  }
+}
